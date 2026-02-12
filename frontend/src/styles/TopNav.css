@@ -1,0 +1,113 @@
+/* =========================
+   1. TOP NAVIGATION BAR
+========================= */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: #d4d0c8;
+  border-bottom: 1px solid #808080;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 13px;
+  z-index: 1000;
+  user-select: none; /* Prevents text selection while clicking */
+}
+
+/* =========================
+   2. TOP MENU ITEMS (File, Edit, etc.)
+========================= */
+.menu-item {
+  position: relative; /* ANCHOR 1: This anchors the Main Dropdown */
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #0a246a;
+  color: white;
+}
+
+.menu-title {
+  white-space: nowrap;
+}
+
+/* =========================
+   3. MAIN DROPDOWN (Vertical List)
+========================= */
+/* This class is applied when isSubmenu={false} */
+.dropdown {
+  position: absolute;
+  top: 100%;       /* Pushes it directly BELOW the menu title */
+  left: 0;
+  min-width: 180px;
+  background: #eee;
+  border: 1px solid #808080;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  padding: 4px 0;
+  z-index: 2000;
+  display: block;  /* Always visible when rendered by React */
+}
+
+/* =========================
+   4. DROPDOWN ITEMS (The individual rows)
+========================= */
+.dropdown-item {
+  position: relative; /* ANCHOR 2: This anchors the Submenu */
+  padding: 5px 10px;
+  white-space: nowrap;
+  color: black;
+  display: flex;       
+  justify-content: space-between; /* Pushes arrow to the far right */
+  align-items: center;
+}
+
+.dropdown-item:hover {
+  background: #0a246a;
+  color: white;
+}
+
+/* The arrow symbol (▸) */
+.submenu-arrow {
+  margin-left: 10px;
+  font-size: 10px;
+}
+
+/* Separator Line */
+.menu-separator {
+  height: 1px;
+  margin: 4px 0;
+  background: #808080;
+}
+
+/* =========================
+   5. SUBMENU (The nested list)
+========================= */
+/* This class is applied when isSubmenu={true} */
+.submenu {
+  position: absolute;
+  top: 0;          /* Aligns perfectly with the TOP of the parent item */
+  left: 100%;      /* Pushes it to the RIGHT of the parent item */
+  margin-left: -1px; /* Optional: Overlaps border slightly for cleaner look */
+  
+  min-width: 180px;
+  background: #eee;
+  border: 1px solid #808080;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  padding: 4px 0;
+  z-index: 3000;   /* Sits on top of everything */
+  
+  display: none;   /* Hidden by default */
+}
+
+/* THE MAGIC TRICK: 
+   When you hover over a .dropdown-item, 
+   find the .submenu immediately inside it and show it.
+*/
+.dropdown-item:hover > .submenu {
+  display: block;
+}
